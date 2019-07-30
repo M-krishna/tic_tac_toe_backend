@@ -4,6 +4,12 @@ from helpers import generate_unique_name
 from .models import User, ActivationLink
 
 
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'email')
+
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User

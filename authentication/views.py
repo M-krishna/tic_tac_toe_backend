@@ -13,6 +13,13 @@ from helpers import generate_activation_token, send_user_mail
 # Create your views here.
 
 
+class CheckAuthentication(APIView):
+
+    @api_response
+    def get(self, request):
+        return {'success': 1, 'status': status.HTTP_200_OK}
+
+
 class LoginView(APIView):
     permission_classes = (AllowAny, )
 
@@ -28,7 +35,13 @@ class LoginView(APIView):
             if user:
                 if user.is_active:
                     token, _ = Token.objects.get_or_create(user=user)
-                    return {'success': 1, 'data': token.key, 'status': status.HTTP_200_OK}
+                    user_object = {
+                        'first_name': user.first_name,
+                        'last_name': user.last_name,
+                        'email': user.email,
+                        'token': token.key
+                    }
+                    return {'success': 1, 'data': user_object, 'status': status.HTTP_200_OK}
                 else:
                     return {'success': 0, 'error': 'Your account is inactive.'}
             else:
