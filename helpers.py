@@ -2,6 +2,7 @@ from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from uuid import uuid4
+from datetime import datetime, date
 
 
 def send_user_mail(**kwargs):
@@ -25,3 +26,14 @@ def generate_unique_name(name):
     res = name + token
     result = ''.join(res.split(' '))
     return result
+
+
+def generate_game_link():
+    now = datetime.now()
+    today = date.today()
+    date_pattern = today.day + today.month + today.year
+    time = datetime.time(now)
+    time_pattern = time.hour + time.minute + time.second
+    random_token = generate_activation_token()
+    game_link = 'tictactoe' + str(date_pattern) + random_token + str(time_pattern)
+    return game_link

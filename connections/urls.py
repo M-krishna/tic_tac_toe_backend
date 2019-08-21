@@ -1,3 +1,6 @@
 from django.urls import path
+from .views import GenerateGameLinkView
 
-urlpatterns = []
+urlpatterns = [
+    path('generate/link', GenerateGameLinkView.as_view(), name='generate-game-link')
+]

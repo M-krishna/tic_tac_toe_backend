@@ -42,7 +42,7 @@ THIRD_PARTY_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
-    # 'channels'
+    'channels'
 ]
 PROJECT_APPS = [
     'authentication',
@@ -105,9 +105,8 @@ TEMPLATES = [
     },
 ]
 
-ASGI_APPLICATION = 'tic_tac_toe.asgi.application'
-# WSGI_APPLICATION = 'tic_tac_toe.routing.application'
-
+WSGI_APPLICATION = 'tic_tac_toe.application'
+ASGI_APPLICATION = 'tic_tac_toe.routing.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases

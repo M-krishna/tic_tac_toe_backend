@@ -18,3 +18,7 @@ class ActivationLink(models.Model):
     activation_code = models.CharField(max_length=500)
     is_expired = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-id']
+        db_table = 'activation_link'
