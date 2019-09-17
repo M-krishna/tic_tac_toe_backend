@@ -104,3 +104,18 @@ class ActivateAccountView(APIView):
                 return {'success': 0, 'status': status.HTTP_406_NOT_ACCEPTABLE}
         else:
             return {'success': 0, 'status': status.HTTP_400_BAD_REQUEST}
+
+
+class ProfileView(APIView):
+
+    @api_response
+    def get(self, request):
+        user = request.user
+        if not user.is_active:
+            return {'success': 0, 'error': 'Your Profile is inactive!', 'status': status.HTTP_406_NOT_ACCEPTABLE}
+        user_object = {
+            'first_name': user.first_name,
+            'last_name': user.last_name,
+            'email': user.email
+        }
+        return {'success': 1, 'data': user_object, 'status': status.HTTP_200_OK}
